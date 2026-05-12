@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const API = axios.create({
-  baseURL: "http://3.84.61.149:8000"
+  baseURL: "http://54.198.216.48:8000/"
 })
 
 export const predictFile = (file) => {

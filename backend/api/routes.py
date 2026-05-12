@@ -10,39 +10,53 @@ router = APIRouter()
 service = PredictionService()
 
 
-# batch prediction API-
+# batch prediction API
 @router.post("/predict")
 async def predict(file: UploadFile = File(...)):
 
     try:
-
         logger.info("File received for prediction")
 
         # File size check
         contents = await file.read()
-
         file_size_mb = len(contents) / (1024 * 1024)
-
         if file_size_mb > MAX_FILE_SIZE_MB:
             raise HTTPException(
                 status_code=400,
                 detail=f"File too large. Max allowed: {MAX_FILE_SIZE_MB}MB"
             )
-
-        # convert to dataframe
+        # converting into dataframe
         df = pd.read_csv(StringIO(contents.decode("utf-8")))
 
         # prediction
         results = service.predict(df)
 
-        # summary
+        # Count total results
         total = len(results)
-        attack = sum(1 for r in results if r["status"] == "Attack")
-        uncertain = sum(1 for r in results if r["status"] == "Uncertain")
+        
+        # Start counters from 0
+        attack = 0
+        uncertain = 0
+        
+        # Check each result one by one
+        for r in results:
+            # If status is Attack
+            if r["status"] == "Attack":
+                attack += 1
+            # If status is Uncertain
+            elif r["status"] == "Uncertain":
+                uncertain += 1
+        
+        # Remaining are Normal
         normal = total - attack - uncertain
-
-        denom = total if total else 1
-
+        
+        # Avoid division by zero
+        if total == 0:
+            denom = 1
+        else:
+            denom = total
+        
+        # Print log message
         logger.info("Returning response to frontend")
 
         return {

@@ -3,30 +3,58 @@ import sys
 import subprocess
 import logging
 
-# NIDS ML pipeline (beginner notes):
-# - preprocess.py loads the CSV, cleans it, then keeps a stratified 200k-row working set
-#   (multiclass Attack Type proportions preserved). It splits train/test; test is for metrics only.
-# - Hyperparameter tuning uses 30% of the training data for speed; train.py retrains on the
-#   full training portion with the best saved parameters.
-# - evaluate.py reports metrics on the held-out test set only.
 
-# Logging
+# Beginner Notes
+
+# This file runs the complete NIDS ML pipeline step by step.
+
+# Step 1: preprocess.py
+# Loads CSV data, cleans it, and prepares train/test data.
+
+# Step 2: feature_selection.py
+# Finds important features using Random Forest.
+
+# Step 3: hyperparameter_tuning.py
+# Finds the best settings for ML models.
+
+# Step 4: train.py
+# Trains the final model using best settings.
+
+# Step 5: evaluate.py
+# Tests the model and creates reports.
+
+# Step 6: predict.py
+# Runs prediction using the trained model.
+
+
+# Logging setup
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
+
 # Required folders
+
 folders = [
     "models",
     "reports",
     "data/processed"
 ]
 
-for folder in folders:
-    os.makedirs(folder, exist_ok=True)
 
-# Pipeline files
+# Create folders one by one
+for folder in folders:
+
+    os.makedirs(
+        folder,
+        exist_ok=True
+    )
+
+
+# Pipeline script files
+
 pipeline = [
     "scripts/preprocess.py",
     "scripts/feature_selection.py",
@@ -36,15 +64,20 @@ pipeline = [
     "scripts/predict.py"
 ]
 
-# Running scripts
+
+# Function to run one script
+
 def run_script(script):
 
     print(f"\n{'=' * 60}")
+
     print(f"Running: {script}")
+
     print(f"{'=' * 60}\n")
 
     try:
 
+        # Run the current Python script
         subprocess.run(
             [sys.executable, script],
             check=True
@@ -55,16 +88,21 @@ def run_script(script):
     except subprocess.CalledProcessError as e:
 
         print(f"\nError while running {script}")
+
         print(e)
 
         sys.exit(1)
 
-# Main pipeline
+
+# Main pipeline starts here
+
 if __name__ == "__main__":
 
     print("\nStarting NIDS ML Pipeline...\n")
 
+    # Run each script one by one
     for script in pipeline:
+
         run_script(script)
 
     print("\nPipeline Completed Successfully")
