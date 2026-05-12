@@ -1,0 +1,362 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap");
+
+:root {
+  --bg: #09090f;
+  --surface: rgba(20, 10, 28, 0.85);
+  --surface-strong: #1a0a26;
+  --text: #ffffff;
+  --muted: #b8b8c8;
+  --primary: #ff2f92;
+  --secondary: #6c63ff;
+  --danger: #ff5d6c;
+  --success: #4ccf8a;
+  --border: rgba(255, 47, 146, 0.25);
+  --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 47, 146, 0.15) 0, rgba(255, 47, 146, 0) 45%),
+    radial-gradient(circle at 80% 10%, rgba(108, 99, 255, 0.12) 0, rgba(108, 99, 255, 0) 42%),
+    linear-gradient(145deg, #09090f 40%, #3d0b2e 100%);
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.dashboard-shell {
+  min-height: 100vh;
+  padding: 36px 18px 50px;
+  position: relative;
+  overflow-x: clip;
+}
+
+.dashboard-shell::before,
+.dashboard-shell::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(30px);
+  z-index: 0;
+}
+
+.dashboard-shell::before {
+  width: 260px;
+  height: 260px;
+  background: rgba(255, 47, 146, 0.12);
+  top: -90px;
+  left: -70px;
+}
+
+.dashboard-shell::after {
+  width: 300px;
+  height: 300px;
+  background: rgba(108, 99, 255, 0.1);
+  right: -100px;
+  bottom: -80px;
+}
+
+.dashboard-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 34px;
+}
+
+.topbar .topbar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.topbar .btn-primary {
+  padding: 8px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.brand-title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+.status-pill {
+  background: rgba(76, 207, 138, 0.13);
+  border: 1px solid rgba(76, 207, 138, 0.36);
+  color: #b8f3d3;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.hero-block {
+  text-align: center;
+  margin-bottom: 28px;
+  animation: reveal 420ms ease;
+}
+
+.hero-title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(2rem, 4.2vw, 3.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.upload-panel {
+  width: min(760px, 100%);
+  margin: 0 auto 30px;
+  padding: 22px;
+  animation: reveal 480ms ease;
+}
+
+.upload-form {
+  display: grid;
+  gap: 14px;
+}
+
+.upload-label {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.upload-dropzone {
+  border: 1.5px dashed rgba(255, 47, 146, 0.45);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 47, 146, 0.08), rgba(255, 47, 146, 0.03));
+  padding: 16px;
+}
+
+.upload-input {
+  width: 100%;
+  color: var(--muted);
+}
+
+.file-meta {
+  font-size: 0.9rem;
+  color: #b6d2df;
+}
+
+.upload-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.btn-primary {
+  background: #ff2f92;
+  color: white;
+  box-shadow: 0 8px 22px rgba(255, 47, 146, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border: 1px solid rgba(179, 226, 245, 0.26);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.results-wrap {
+  display: grid;
+  gap: 22px;
+  animation: reveal 550ms ease;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.stat-card {
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(170deg, rgba(17, 35, 45, 0.95), rgba(10, 26, 36, 0.95));
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 7px;
+}
+
+.stat-value {
+  font-family: "Sora", sans-serif;
+  font-size: 1.9rem;
+  margin-bottom: 6px;
+}
+
+.stat-footnote {
+  font-size: 0.84rem;
+  color: #d9a4c8;
+}
+
+.chart-panel,
+.table-panel {
+  padding: 22px;
+}
+
+.panel-title {
+  font-family: "Sora", sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+
+.chart-meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.legend-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.result-table th,
+.result-table td {
+  text-align: left;
+  padding: 11px;
+  border-bottom: 1px solid rgba(179, 226, 245, 0.18);
+}
+
+.result-table th {
+  color: #c0d9e6;
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badge-attack {
+  background: rgba(255, 93, 108, 0.17);
+  color: #ffd0d5;
+  border: 1px solid rgba(255, 93, 108, 0.42);
+}
+
+.badge-normal {
+  background: rgba(76, 207, 138, 0.15);
+  color: #bff7d7;
+  border: 1px solid rgba(76, 207, 138, 0.42);
+}
+
+.badge-medium {
+  background: rgba(255, 159, 69, 0.16);
+  color: #ffd7a8;
+  border: 1px solid rgba(255, 159, 69, 0.45);
+}
+
+.badge-uncertain {
+  background: rgba(255, 200, 87, 0.16);
+  color: #ffe6a8;
+  border: 1px solid rgba(255, 200, 87, 0.45);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+  .dashboard-shell {
+    padding: 22px 14px 30px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .upload-panel,
+  .chart-panel,
+  .table-panel {
+    padding: 16px;
+  }
+}

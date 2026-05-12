@@ -1,0 +1,23 @@
+@"
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+
+node_modules/
+dist/
+build/
+.vite/
+
+*.pkl
+*.npy
+ML/data/processed/
+ML/data/cicids2017_cleaned.csv
+ML/reports/*.png
+
+.DS_Store
+Thumbs.db
+desktop.ini
+"@ | Set-Content .gitignore
