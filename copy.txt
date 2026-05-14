@@ -1,0 +1,451 @@
+\documentclass[9pt,conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,fit,backgrounds,shadows,
+                decorations.pathreplacing,decorations.markings,calc,patterns,
+                matrix,chains,scopes}
+
+% ---- compact page geometry ----
+\usepackage{geometry}
+\geometry{
+  letterpaper,
+  top=0.38in, bottom=0.38in,
+  left=0.42in, right=0.42in,
+  columnsep=0.18in
+}
+\setlength{\abovecaptionskip}{2pt}
+\setlength{\belowcaptionskip}{0pt}
+\setlength{\textfloatsep}{4pt}
+\setlength{\intextsep}{2pt}
+
+% ---- colour palette ----
+\definecolor{clBlue}{HTML}{1A3C5E}
+\definecolor{clLightBlue}{HTML}{2E86C1}
+\definecolor{clCyan}{HTML}{17A589}
+\definecolor{clOrange}{HTML}{D35400}
+\definecolor{clRed}{HTML}{C0392B}
+\definecolor{clGreen}{HTML}{1E8449}
+\definecolor{clPurple}{HTML}{6C3483}
+\definecolor{clGold}{HTML}{B7950B}
+\definecolor{clGray}{HTML}{5D6D7E}
+
+\begin{document}
+
+\title{\vspace{-4pt}%
+\textbf{CyberSentinel-X: A Cloud-Native Network Intrusion Detection System}\\
+\large\normalfont Containerised Microservices, Modular ML Pipeline \&\ Real-Time Threat Mitigation at Scale}
+
+\author{%
+\IEEEauthorblockN{Mukarram Raza\hspace{1.5em}Abdullah Qureshi\hspace{1.5em}Shuja-ud-din}
+\IEEEauthorblockA{\textit{BSSE23029\hspace{3.6em}BSSE23101\hspace{3.8em}BSSE23035}}
+}
+\maketitle
+\vspace{-10pt}
+
+% ================================================================
+%  ABSTRACT
+% ================================================================
+\begin{abstract}
+We present \textbf{CyberSentinel-X}, a production-grade Network Intrusion Detection System (NIDS) architected around containerised microservices and a fully automated, modular machine learning pipeline.
+Trained and evaluated on the CICIDS2017 benchmark corpus under a rigorous, data-driven preprocessing regime—eliminating infinite values, near-perfectly correlated features ($r\!\ge\!0.99$), and statistically irrelevant dimensions via Kruskal-Wallis and Random Forest importance tests—the system achieves \textbf{99.88\%} classification accuracy and an \textbf{F1 score of 0.9965} using an HPO-optimised XGBoost engine. Predictions are enriched with isotonically calibrated confidence estimates and Mahalanobis-distance Out-of-Distribution (OOD) scores before being delivered via a RESTful FastAPI gateway, deployed on AWS EC2 through Amazon ECR.
+\end{abstract}
+
+\vspace{-2pt}
+% ================================================================
+%  MEGA ARCHITECTURE FIGURE
+% ================================================================
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  %-- base node styles
+  comp/.style={rectangle, draw=#1!70!black, thick, fill=#1!12,
+               minimum width=2.1cm, minimum height=0.72cm,
+               align=center, font=\sffamily\tiny\bfseries,
+               rounded corners=3pt, drop shadow},
+  subnode/.style={rectangle, draw=#1!60, thin, fill=#1!8,
+                  minimum width=1.4cm, minimum height=0.42cm,
+                  align=center, font=\sffamily\tiny, rounded corners=2pt},
+  db/.style={cylinder, draw=#1!70!black, thick, fill=#1!12,
+             minimum width=1.6cm, minimum height=0.9cm,
+             align=center, font=\sffamily\tiny\bfseries,
+             shape border rotate=90, aspect=0.28, drop shadow},
+  lane/.style={rectangle, draw=#1!40, dashed, thick,
+               inner sep=8pt, fill=#1!4, rounded corners=6pt},
+  laneLabel/.style={font=\sffamily\bfseries\scriptsize, text=#1!70!black},
+  arr/.style={-{Stealth[scale=0.9]}, thick, draw=#1!80},
+  arrD/.style={-{Stealth[scale=0.9]}, thick, draw=#1!80, dashed}
+]
+
+% ===================================================
+% ROW 0 — THREAT TAXONOMY (far left column)
+% ===================================================
+\node[comp=clRed, minimum width=1.9cm, minimum height=0.55cm] (tax_title)
+  at (-9.3, 3.58) {\color{clRed}Threat Taxonomy};
+
+\node[subnode=clRed, minimum width=1.6cm] (tax_dos)
+  [below=0.50cm of tax_title] {DoS / DDoS};
+\node[subnode=clOrange, minimum width=1.6cm] (tax_port)
+  [below=0.25cm of tax_dos] {Port Scan};
+\node[subnode=clGold, minimum width=1.6cm] (tax_bf)
+  [below=0.25cm of tax_port] {Brute Force};
+\node[subnode=clPurple, minimum width=1.6cm] (tax_web)
+  [below=0.25cm of tax_bf] {Web Attack};
+\node[subnode=clGray, minimum width=1.6cm] (tax_bot)
+  [below=0.25cm of tax_web] {Botnet};
+\node[subnode=clGreen, minimum width=1.9cm] (tax_ben)
+  [below=0.50cm of tax_bot] {\color{clGreen}BENIGN};
+
+\begin{scope}[on background layer]
+  \node[lane=clRed, fit=(tax_title)(tax_dos)(tax_port)(tax_bf)(tax_web)(tax_bot)(tax_ben),
+        label={[laneLabel=clRed]above:\footnotesize Attack Classes}] {};
+\end{scope}
+
+% ===================================================
+% ROW 1 — INGESTION / CLIENT LAYER  (x ≈ -6.5)
+% ===================================================
+\node[comp=clBlue] (csv)     at (-6.6, 3.5)  {CSV / PCAP\\Traffic Logs};
+\node[comp=clBlue] (live)    at (-6.6, 2.3)  {Live Interface\\(tcpdump)};
+\node[comp=clBlue] (admin)   at (-6.6, 1.0)  {Admin\\Dashboard};
+
+\node[comp=clLightBlue, minimum width=2.0cm] (react)
+                              at (-4.4, 2.3)  {React\\Web UI};
+\node[subnode=clLightBlue]  (ws)   [above=0.40cm of react] {WebSocket Feed};
+\node[subnode=clLightBlue]  (vis)  [below=0.40cm of react] {D3.js Visualiser};
+
+\draw[arr=clBlue] (csv)   -- node[above,font=\tiny,sloped]{upload} (react);
+\draw[arr=clBlue] (live)  -- (react);
+\draw[arr=clBlue] (admin) -- node[below,font=\tiny,sloped]{manage} (react);
+
+\begin{scope}[on background layer]
+  \node[lane=clBlue,
+        fit=(csv)(live)(admin)(react)(ws)(vis),
+        label={[laneLabel=clBlue]above:\footnotesize Client / Ingestion Layer}] (clientLane) {};
+\end{scope}
+
+% ===================================================
+% ROW 2 — API GATEWAY  (x ≈ -1.8)
+% ===================================================
+% \node[comp=clOrange] (lb)     at (-1.8, 3.5)  {FastAPI};
+\node[comp=clOrange] (jwt)    at (-1.6, 3.5)  {JWT Auth\\Middleware};
+\node[comp=clOrange] (rate)   at (-1.6, 2.5)  {Rate Limiter\\(100 req/s)};
+\node[comp=clOrange] (valid)  at (-1.6, 1.5)  {Pydantic\\Schema\\Validator};
+\node[comp=clOrange] (router) at (-1.6, 0.5)  {FastAPI\\Router};
+
+% \draw[arr=clOrange] (lb)    -- (jwt);
+\draw[arr=clOrange] (jwt)   -- (rate);
+\draw[arr=clOrange] (rate)  -- (valid);
+\draw[arr=clOrange] (valid) -- (router);
+
+\draw[arr=clOrange] (react) -- node[above,font=\tiny]{REST POST} (jwt);
+
+\begin{scope}[on background layer]
+  \node[lane=clOrange,
+        fit=(jwt)(rate)(valid)(router),
+        label={[laneLabel=clOrange]above:\footnotesize AWS API Gateway}] (apiLane) {};
+\end{scope}
+
+% ===================================================
+% ROW 3 — PREPROCESSING  (x ≈ 1.3)
+% ===================================================
+\node[comp=clCyan] (inf)   at (1.2, 3.5)  {Inf / NaN\\Handler};
+\node[comp=clCyan] (dup)   at (1.2, 2.5)  {Duplicate\\Remover};
+\node[comp=clCyan] (enc)   at (1.2, 1.5)  {Label\\Encoder};
+\node[comp=clCyan] (scl)   at (1.2, 0.5)  {Standard\\Scaler};
+\node[comp=clCyan] (corr)  at (1.2, -0.5)  {Pearson\\$r{\ge}0.99$\\Filter};
+\node[comp=clCyan] (kw)    at (1.2, -1.5)  {Kruskal-Wallis\\Feature Rank};
+
+\draw[arr=clCyan] (inf)  -- (dup);
+\draw[arr=clCyan] (dup)  -- (enc);
+\draw[arr=clCyan] (enc)  -- (scl);
+\draw[arr=clCyan] (scl)  -- (corr);
+\draw[arr=clCyan] (corr) -- (kw);
+\draw[arr=clCyan]
+(router.east) -- ++(0.35,0)
+node[midway,above,font=\tiny]{payload}
+-- (-0.2,3.5)
+-- (inf.west);
+
+\begin{scope}[on background layer]
+  \node[lane=clCyan,
+        fit=(inf)(dup)(enc)(scl)(corr)(kw),
+        label={[laneLabel=clCyan]above:\footnotesize Preprocessing}] (prepLane) {};
+\end{scope}
+
+% ===================================================
+% ROW 4 — FEATURE SELECTION  (x ≈ 3.9)
+% ===================================================
+\node[comp=clGold] (rffi)  at (4.0, 3.485)  {Random Forest\\Feature\\Importance};
+\node[comp=clGold] (topk)  at (4.0, 2.1)  {Top-K\\Selector\\($k{=}25$)};
+\node[comp=clGold] (pca)   at (4.0, 0.9)  {Variance\\Threshold\\Pruner};
+\node[db=clGold]   (feat_store) at (4.0,-0.4) {Feature\\Store};
+
+\draw[arr=clGold] (rffi)  -- (topk);
+\draw[arr=clGold] (topk)  -- (pca);
+\draw[arr=clGold] (pca)   -- (feat_store);
+\draw[arr=clGold]
+(kw.east) -- ++(0.35,0)
+node[midway,above,font=\tiny]{ranked features}
+-- (2.6,3.5)
+-- (rffi.west);
+
+\begin{scope}[on background layer]
+  \node[lane=clGold,
+        fit=(rffi)(topk)(pca)(feat_store),
+        label={[laneLabel=clGold]above:\footnotesize Feature Engineering}] (featLane) {};
+\end{scope}
+
+% ===================================================
+% ROW 5 — ML ENGINE  (x ≈ 6.5)
+% ===================================================
+\node[comp=clGreen] (xgb)
+                         at (6.8, 3.35)  {\color{clGreen}XGBoost\\\tiny n\_est=500\\\tiny max\_depth=8\\\tiny lr=0.05\\\tiny subsample=0.8};
+
+\node[comp=clGray]  (rf2)    at (6.8, 1.9)  {Random Forest\\(Ensemble Check)};
+\node[comp=clPurple](calib)  at (6.8, 0.75)  {Isotonic\\Calibration};
+\node[comp=clRed]   (ood)    at (6.8, -0.35)  {OOD Detector\\(Mahalanobis)};
+\node[comp=clBlue]  (thresh) at (6.8, -1.5)  {Confidence\\Threshold\\$\tau{=}0.82$};
+
+\draw[arr=clGreen]
+(feat_store.east) -- ++(0.6,0)
+node[midway,above,font=\tiny]{25 features}
+-- (5.4,3.35)
+-- (xgb.west);
+
+\draw[arr=clGreen]  (xgb)    -- (rf2);
+\draw[arr=clPurple] (rf2)    -- (calib);
+\draw[arr=clRed]    (calib)  -- (ood);
+\draw[arr=clBlue]   (ood)    -- (thresh);
+
+\begin{scope}[on background layer]
+  \node[lane=clGreen,
+        fit=(xgb)(rf2)(calib)(ood)(thresh),
+        label={[laneLabel=clGreen]above:\footnotesize ML Inference}] (mlLane) {};
+\end{scope}
+
+% ===================================================
+% ROW 6 — DOCKERIZATION  (x ≈ 9.2)
+% ===================================================
+\node[comp=clPurple] (compose) at (9.6, 3.6)  {Docker\\Compose};
+\node[comp=clPurple] (c_front) at (9.6, 2.2)  {Frontend Container\\(Nginx)};
+\node[comp=clPurple] (c_back)  at (9.6, 1.1)  {Backend Container\\(FastAPI)};
+\node[comp=clPurple] (net)     at (9.6, 0.0)  {ml-network\\(Bridge)};
+\node[db=clPurple]   (vols)    at (9.6,-1.5)  {Shared\\Volumes};
+
+% Straight paths and nicely routed bypasses
+\draw[arr=clPurple](thresh.east) -- ++(0.2,0)|- node[pos=0.25,above,font=\tiny]{returns}(c_back.north west);
+\draw[arr=clPurple] (compose) -- (c_front);
+\draw[arr=clPurple] (compose.east) -- ++(0.2,0) |- (c_back.north east);
+\draw[arr=clPurple] (c_back) -- (net);
+\draw[arr=clPurple] (c_front.west) -- ++(-0.2,0) |- (net.west);
+\draw[arr=clPurple] (c_back.south east) -- ++(0.2,0) |- (vols.east);
+
+% Feedback arrow to UI
+\draw[arr=clPurple]
+(c_front.west) |-
+node[pos=0.97,below,font=\tiny,align=center]{serves client UI}
+(react.east);
+
+\begin{scope}[on background layer]
+  \node[lane=clPurple,
+        fit=(compose)(c_front)(c_back)(net)(vols),
+        label={[laneLabel=clPurple]above:\footnotesize Dockerization}] (dockerLane) {};
+\end{scope}
+
+% ===================================================
+% AWS INFRA BAR  (top strip)
+% ===================================================
+\node[comp=clGold, minimum width=2.0cm, minimum height=0.45cm]
+  (ecr) at (2.1, 5.55) {\tiny Amazon ECR\\(Container Registry)};
+\node[comp=clGold, minimum width=2.0cm, minimum height=0.45cm]
+  (ec2) at (5.3, 5.55) {\tiny AWS EC2 Instances\\(t3.xlarge)};
+% \node[comp=clGold, minimum width=2.0cm, minimum height=0.45cm]
+%   (cw)  at (8.4, 5.55) {\tiny CloudWatch\\Monitoring};
+
+\draw[arrD=clGold] (ecr) -- node[right,font=\tiny]{push} (ec2);
+% \draw[arrD=clGold] (ec2) -- node[right,font=\tiny]{metrics} (cw);
+
+\begin{scope}[on background layer]
+  \node[lane=clGold, inner sep=5pt,
+        fit=(ecr)(ec2),
+        label={[laneLabel=clGold]left:\footnotesize AWS Infrastructure}] (awsLane) {};
+\end{scope}
+
+\draw[arrD=clGold] (ecr.south) -- ++(0,-0.3) -| (jwt.north);
+\draw[arrD=clGold] (ec2.south) -- ++(0,-0.3) -| (xgb.north);
+% \draw[arrD=clGold] (cw.south)  -- ++(0,-0.3) -| (compose.north);
+
+% ===================================================
+% MINI PERFORMANCE CHART  (far right)
+% ===================================================
+\begin{scope}[shift={(11.4,1.0)}]
+  \node[font=\sffamily\tiny\bfseries, text=clBlue] at (0.85, 3.2)
+    {Model Comparison};
+
+  % Axes
+  \draw[thick, clGray] (0,0) -- (0,2.8);
+  \draw[thick, clGray] (0,0) -- (1.7,0);
+  \node[font=\tiny, rotate=90, text=clGray] at (2.0,1.4) {F1 Score};
+
+  % Bars (F1 scores scaled to height 2.8)
+  \fill[clGreen!80]  (0.05,0) rectangle (0.32, 2.79);
+  \fill[clCyan!80]   (0.38,0) rectangle (0.65, 2.77);
+  \fill[clGold!80]   (0.71,0) rectangle (0.98, 2.39);
+  \fill[clOrange!80] (1.04,0) rectangle (1.31, 1.44);
+  \fill[clRed!80]    (1.37,0) rectangle (1.64, 1.40);
+
+  % Value labels
+  \node[font=\sffamily\scriptsize\bfseries, text=clGreen, rotate=90]
+    at (0.185, 2.3) {.9965};
+  \node[font=\sffamily\scriptsize, text=clCyan, rotate=90]
+    at (0.515, 2.3) {.9959};
+  \node[font=\sffamily\scriptsize, text=clGold, rotate=90]
+    at (0.845, 1.9) {.8523};
+  \node[font=\sffamily\scriptsize, text=clOrange, rotate=90]
+    at (1.175, 0.95) {.5142};
+  \node[font=\sffamily\scriptsize, text=clRed, rotate=90]
+    at (1.505, 0.95) {.5016};
+
+  % X labels
+  \node[font=\tiny\bfseries, rotate=45, anchor=west, text=clGreen]
+    at (0.05,-0.05) {XGB};
+  \node[font=\tiny, rotate=45, anchor=west, text=clCyan]
+    at (0.38,-0.05) {RF};
+  \node[font=\tiny, rotate=45, anchor=west, text=clGold]
+    at (0.71,-0.05) {LR};
+  \node[font=\tiny, rotate=45, anchor=west, text=clOrange]
+    at (1.04,-0.05) {SVM};
+  \node[font=\tiny, rotate=45, anchor=west, text=clRed]
+    at (1.37,-0.05) {IF};
+
+  % Gridlines
+  \foreach \y/\lbl in {0.7/0.25, 1.4/0.50, 2.1/0.75, 2.8/1.00}{
+    \draw[gray!30, thin] (0,\y) -- (1.7,\y);
+    \node[font=\tiny, text=clGray, anchor=east] at (0.1,\y) {\lbl};
+  }
+
+  \begin{scope}[on background layer]
+    \node[lane=clBlue, inner sep=6pt,
+          fit={(0,-0.35)(1.7,3.3)},
+          label={[laneLabel=clBlue]below:\scriptsize F1 Benchmark}] {};
+  \end{scope}
+\end{scope}
+
+% ===================================================
+% FEATURE IMPORTANCE MINI CHART (bottom right)
+% ===================================================
+\begin{scope}[shift={(11.4,-1.55)}]
+  \node[font=\sffamily\tiny\bfseries, text=clGold] at (0.85, 1.2)
+    {Top Feature Importances};
+
+  \draw[thick, clGray] (0,0) -- (1.7,0);
+  % Horizontal bars (importance × 20)
+  \fill[clGold!70]  (0, 0.75) rectangle (1.682, 0.95);
+  \fill[clOrange!70](0, 0.50) rectangle (1.616, 0.70);
+  \fill[clRed!60]   (0, 0.25) rectangle (1.574, 0.45);
+  \fill[clPurple!60](0, 0.00) rectangle (1.350, 0.20);
+
+  \node[font=\tiny, anchor=west, text=clGold]
+    at (0.02, 0.85) {Avg Pkt Size};
+  \node[font=\tiny, anchor=west, text=clOrange]
+    at (0.02, 0.60) {Bwd Pkt Std};
+  \node[font=\tiny, anchor=west, text=clRed]
+    at (0.02, 0.35) {Pkt L Var};
+  \node[font=\tiny, anchor=west, text=clPurple]
+    at (0.02, 0.10) {Max Pkt L};
+
+  \begin{scope}[on background layer]
+    \node[lane=clGold, inner sep=5pt,
+          fit={(-0.1,-0.1)(1.75,1.25)},
+          label={[laneLabel=clGold]below:\scriptsize Importance}] {};
+  \end{scope}
+\end{scope}
+
+% ===================================================
+% ACCURACY BADGE
+% ===================================================
+\node[circle, draw=clGreen!80, ultra thick, fill=clGreen!10,
+      minimum size=1.5cm, align=center, font=\sffamily\tiny\bfseries,
+      drop shadow] at (12.25, 5.5)
+  {\color{clGreen}\large\textbf{99.88\%}\\\tiny Accuracy};
+
+\end{tikzpicture}
+}
+
+\vspace{-2pt}
+\caption{CyberSentinel-X: Full-stack end-to-end architecture.
+  \textbf{Left:} Attack taxonomy (6 classes).
+  \textbf{Ingestion \& Gateway:} React UI with WebSocket feed,  JWT auth, rate limiting, and Pydantic validation.
+  \textbf{Preprocessing:} Deterministic NaN/Inf handling, deduplication, encoding, $z$-score scaling, and correlation pruning ($r\!\ge\!0.99$).
+  \textbf{Feature Engineering:} RF-importance + Kruskal-Wallis ranking, Top-25 selector, variance-threshold pruner, Feature Store.
+  \textbf{ML Engine:} HPO-tuned XGBoost (primary) with RF ensemble cross-check, isotonic calibration, Mahalanobis OOD detection, and confidence gating ($\tau\!=\!0.82$).
+  \textbf{Dockerization:} Docker Compose orchestrating Nginx (frontend) and FastAPI (backend) containers, linked via an \texttt{ml-network} bridge and shared volumes.
+  \textbf{Right:} F1-score benchmark across all evaluated models and top-4 feature importances.}
+\label{fig:architecture}
+\end{figure*}
+
+% ================================================================
+%  BODY — 2-COLUMN
+% ================================================================
+
+\vspace{-4pt}
+\section{Introduction}
+\vspace{-2pt}
+Modern adversarial traffic has grown in velocity and sophistication, demanding detection frameworks that are simultaneously accurate, latency-sensitive, and operationally resilient. \textbf{CyberSentinel-X} addresses these constraints through a cloud-native deployment model combining containerised microservices with an end-to-end automated ML pipeline. The widely-adopted \textbf{CICIDS2017} benchmark—encompassing DoS, DDoS, port scans, brute-force, web-application, and botnet attack vectors—serves as the foundation for training and evaluation. Rare anomalies (Infiltration, Heartbleed, $<\!0.01\%$ prevalence) are excluded to prevent class-imbalance overfitting; all remaining attack families are consolidated into six semantically coherent categories to maximise generalisation.
+
+\vspace{-2pt}
+\section{Methodology}
+\vspace{-2pt}
+
+\subsection{Cloud-Native Architecture}
+The system adopts a three-tier deployment model: (i) a React/Vite dashboard providing interactive visualisation of live predictions; (ii) a FastAPI gateway secured by JWT authentication, rate-limiting ($100\ \text{req/s}$), and Pydantic schema enforcement; and (iii) an ML runtime hosted on \texttt{t3.xlarge} EC2 instances, provisioned via Amazon ECR. The entire stack is containerised using Docker Compose, pairing an Nginx frontend with the FastAPI backend over a dedicated bridge network (\texttt{ml-network}) with shared volumes for persistence, ensuring seamless portability and isolated execution. 
+
+\subsection{ML Pipeline}
+\textbf{Preprocessing:} All raw CICFlowMeter features undergo deterministic cleaning—infinite values are clipped, near-zero-variance columns are pruned, duplicates are eliminated, and the $<\!1\%$ remaining missing values are dropped. Continuous features are $z$-score normalised; categorical metadata (IP protocol, flag fields) is ordinal-encoded.
+\textbf{Feature selection:} Pearson correlation pruning ($r\!\ge\!0.99$) removes redundant dimensions; a Kruskal-Wallis non-parametric rank test eliminates statistically irrelevant features; a Random Forest importance sweep then selects the top-25 discriminative metrics, dominated by packet-size statistics.
+\textbf{Model training \& HPO:} XGBoost is tuned via stratified 5-fold cross-validated random search over \texttt{n\_estimators} $\in[300,700]$, \texttt{max\_depth} $\in[6,12]$, and \texttt{learning\_rate} $\in[0.01,0.1]$, optimising macro F1 to jointly penalise false positives (alert fatigue) and false negatives (missed threats).
+\textbf{Calibration \& OOD:} Post-training, class probabilities are isotonically recalibrated (ECE $<\!1.2\%$). A Mahalanobis-distance OOD detector flags adversarial or distribution-shifted inputs before a hard confidence gate ($\tau\!=\!0.82$) suppresses low-certainty predictions.
+
+\vspace{-2pt}
+\section{Results}
+\vspace{-2pt}
+
+\begin{table}[ht]
+\vspace{-4pt}
+\caption{Model Performance Comparison (CICIDS2017 Held-Out Test Set)}
+\vspace{-4pt}
+\begin{center}
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{l r r r r}
+\toprule
+\textbf{Model} & \textbf{Acc.} & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} \\
+\midrule
+\textbf{XGBoost (ours)} & \textbf{.9988} & .9941 & .9989 & \textbf{.9965} \\
+Random Forest           & .9986          & .9955 & .9962 & .9959 \\
+Logistic Regression     & .9437          & .7648 & .9625 & .8523 \\
+One-Class SVM           & .7985          & .4337 & .6312 & .5142 \\
+Isolation Forest        & .7960          & .4270 & .6078 & .5016 \\
+\bottomrule
+\end{tabular}
+\label{tab:models}
+\end{center}
+\vspace{-6pt}
+\end{table}
+
+XGBoost decisively outperforms all evaluated baselines. Its advantage over Random Forest is subtle in accuracy (+0.02 pp) but more pronounced in recall (+0.27 pp), reflecting superior sensitivity to minority attack classes under class imbalance. Logistic Regression's steep precision shortfall ($\Delta\!=\!0.23$) is indicative of its linear decision boundary being inadequate for the non-linear, high-dimensional traffic manifold. Unsupervised baselines (One-Class SVM, Isolation Forest) perform near chance, confirming the necessity of fully supervised training.
+
+\vspace{-2pt}
+\section{Conclusion}
+\vspace{-2pt}
+CyberSentinel-X delivers a technically resilient, production-ready NIDS achieving \textbf{99.88\% accuracy} and \textbf{F1 = 0.9965} on CICIDS2017. Its modular architecture—spanning rigorous data-driven preprocessing, statistically grounded feature selection, HPO-optimised gradient boosting, and isotonic probability calibration with OOD gating—establishes a robust template for real-time cyber-threat mitigation at cloud scale.
+
+\end{document}
