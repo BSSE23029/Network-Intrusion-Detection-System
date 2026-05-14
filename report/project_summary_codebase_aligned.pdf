@@ -1,0 +1,898 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+7 0 obj
+<< /Length 28026 >>
+stream
+0.000 0.000 0.000 rg
+BT /F2 14.20 Tf 184.04 815.00 Td (Network Intrusion Detection System) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 6.40 Tf 241.85 802.00 Td (BSSE23 - Machine Learning Lab Project) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.90 Tf 232.33 793.00 Td (Department of Computer and Software Engineering) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.70 Tf 242.58 785.00 Td (Information Technology University, Lahore) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 5.90 Tf 167.00 759.00 Td (Mukarram Raza) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F3 5.10 Tf 172.00 751.00 Td (BSSE23029) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 5.90 Tf 283.00 759.00 Td (Abdullah Qureshi) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F3 5.10 Tf 288.00 751.00 Td (BSSE23101) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 5.90 Tf 402.00 759.00 Td (Shuja-ud-din) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F3 5.10 Tf 407.00 751.00 Td (BSSE23035) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F3 5.65 Tf 25.00 726.00 Td (Abstract-) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 726.00 Td (We present an implementation-aligned Network Intrusion Detection System \(NIDS\) that) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 720.25 Td (classifies uploaded network-flow records as Normal, Attack, or Uncertain using a calibrated) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 714.50 Td (machine-learning backend. The real system is implemented as a React/Vite single-page) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 708.75 Td (frontend, a FastAPI prediction service, and a Dockerized AWS deployment. The ML workflow) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 703.00 Td (uses a cleaned CICIDS2017 dataset, deterministic preprocessing, StandardScaler) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 697.25 Td (normalization, SMOTE balancing, Optuna tuning, supervised model comparison, probability) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 691.50 Td (calibration, and an Isolation Forest out-of-distribution detector. The project is deployed) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 685.75 Td (on AWS EC2 with separate frontend and backend containers built for ECR-based delivery; the) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 680.00 Td (frontend is served by Nginx on port 3000 and communicates with the backend API on port) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 62.00 674.25 Td (8000.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 6.00 Tf 117.00 663.50 Td (I. INTRODUCTION) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 33.00 655.50 Td (Modern network environments generate high-volume flow data that cannot be manually inspected at) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 649.75 Td (operational speed. This project addresses that challenge by combining a browser dashboard, REST API) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 644.00 Td (inference, and a trained ML pipeline for attack detection. The implementation does not include JWT) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 638.25 Td (authentication, Redis, Kubernetes, OAuth, RBAC, WebSockets, MongoDB, or CI/CD automation; these are) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 632.50 Td (intentionally excluded from the report because they are not present in the codebase.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 6.00 Tf 123.00 621.75 Td (II. METHODOLOGY) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 5.65 Tf 25.00 613.75 Td (A. Cloud-Native Architecture) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 33.00 607.35 Td (The system uses a three-tier deployment model: \(i\) a React 19/Vite dashboard with React Router, Axios,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 601.60 Td (Recharts, and Framer Motion; \(ii\) a FastAPI backend exposing GET / and POST /predict; and \(iii\) serialized) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 595.85 Td (ML artifacts loaded from the backend models directory. Docker separates frontend and backend runtimes. The) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 590.10 Td (frontend image uses a Node build stage and an Nginx runtime stage, while the backend image uses) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 584.35 Td (python:3.10-slim and Uvicorn. Docker Compose defines a bridge network, health check, model/log volumes,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 578.60 Td (and port mappings 3000:80 and 8000:8000. In cloud deployment, images are stored in AWS ECR and) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 572.85 Td (pulled/executed on AWS EC2.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 5.65 Tf 25.00 564.10 Td (B. ML Pipeline) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 33.00 557.70 Td (Preprocessing: The script loads ML/data/cicids2017_cleaned.csv, removes duplicate and invalid rows,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 551.95 Td (samples 200,000 records with stratification when possible, maps Normal Traffic to 0 and all attacks to 1,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 546.20 Td (removes leakage identifiers such as IPs, timestamps, and flow IDs when present, keeps numeric features,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 540.45 Td (performs an 80/20 stratified split, fits StandardScaler, and applies SMOTE only on the training set.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 534.70 Td (Training: Random Forest, XGBoost, Logistic Regression, Isolation Forest, and One-Class SVM are compared) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 528.95 Td (using accuracy, precision, recall, and F1. Optuna tunes Random Forest and XGBoost with 3-fold stratified) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 523.20 Td (validation. Evaluation scripts generate model_comparison.csv, feature_importance.csv, confusion matrix,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 517.45 Td (and ROC curve outputs. Deployment artifacts include scaler.pkl, features.pkl, calibrated_model.pkl,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 25.00 511.70 Td (best_model.pkl, and ood_detector.pkl.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 6.00 Tf 404.00 726.00 Td (III. RESULTS) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 314.00 718.00 Td (The implemented comparison table in ML/data/model_comparison.csv shows that supervised tree-based models) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 712.25 Td (dominate the evaluated held-out test set. Random Forest obtains the highest F1 score in the tracked ML) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 706.50 Td (workspace, while XGBoost is also highly competitive and is present in the backend artifact set. The) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 700.75 Td (backend ModelLoader prefers calibrated_model.pkl when available, falling back to best_model.pkl if) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 695.00 Td (calibration is absent. This deployment-aware distinction is important because the API returns calibrated) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 689.25 Td (probabilities used by the uncertainty band rather than only hard labels.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 5.50 Tf 370.00 680.50 Td (TABLE I) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.90 Tf 321.00 672.50 Td (MODEL PERFORMANCE COMPARISON \(CICIDS2017 HELD-OUT TEST SET\)) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+0.50 w 321.00 605.50 218.00 61.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+0.45 w 321.00 654.50 m 539.00 654.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+0.35 w 403.00 666.50 m 403.00 605.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+0.35 w 437.00 666.50 m 437.00 605.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+0.35 w 471.00 666.50 m 471.00 605.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+0.35 w 505.00 666.50 m 505.00 605.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.80 Tf 324.00 658.50 Td (Model) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.80 Tf 406.00 658.50 Td (Acc.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.80 Tf 440.00 658.50 Td (Prec.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.80 Tf 474.00 658.50 Td (Rec.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.80 Tf 508.00 658.50 Td (F1) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 324.00 645.50 Td (Random Forest) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 406.00 645.50 Td (.9987) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 440.00 645.50 Td (.9957) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 474.00 645.50 Td (.9966) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 508.00 645.50 Td (.9962) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 324.00 636.50 Td (XGBoost) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 406.00 636.50 Td (.9986) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 440.00 636.50 Td (.9926) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 474.00 636.50 Td (.9990) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 508.00 636.50 Td (.9958) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 324.00 627.50 Td (Logistic Regression) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 406.00 627.50 Td (.9437) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 440.00 627.50 Td (.7649) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 474.00 627.50 Td (.9625) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 508.00 627.50 Td (.8524) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 324.00 618.50 Td (One-Class SVM) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 406.00 618.50 Td (.7986) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 440.00 618.50 Td (.4338) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 474.00 618.50 Td (.6312) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 508.00 618.50 Td (.5142) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 324.00 609.50 Td (Isolation Forest) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 406.00 609.50 Td (.7961) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 440.00 609.50 Td (.4270) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 474.00 609.50 Td (.6078) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 4.70 Tf 508.00 609.50 Td (.5016) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.30 Tf 306.00 591.50 Td (The top feature-importance outputs emphasize Average Packet Size,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.30 Tf 306.00 585.75 Td (Backward Packet Length Std, Packet Length Variance, Max Packet Length,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.30 Tf 306.00 580.00 Td (Packet Length Std, and Destination Port as strong indicators.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 6.00 Tf 392.00 571.00 Td (IV. SYSTEM BEHAVIOR) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 314.00 563.00 Td (At runtime, the dashboard uploads a CSV file through Axios as multipart/form-data. The backend enforces a) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 557.25 Td (50 MB file limit, parses CSV content with pandas, validates that all 52 saved feature columns exist,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 551.50 Td (replaces missing or infinite values, applies the saved scaler, and computes P\(attack\). Predictions below) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 545.75 Td (0.40 are Normal, above 0.60 are Attack, and values in the 0.40-0.60 band are Uncertain. If the OOD) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 540.00 Td (detector flags a row as unusual and the classifier says Normal, the system overrides the result to) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 534.25 Td (Uncertain and lowers confidence. The frontend renders total, attack, normal, uncertain, attack percentage,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 528.50 Td (pie chart, and a capped 100-row result table.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 6.00 Tf 394.00 517.75 Td (V. CONCLUSION) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 314.00 509.75 Td (The corrected implementation presents a production-oriented academic NIDS prototype: a React/Nginx) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 504.00 Td (frontend, FastAPI ML backend, calibrated classifier, OOD safety layer, Dockerized services, AWS ECR image) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 498.25 Td (workflow, and AWS EC2 execution. Future work should align CORS with the active deployment IP, add HTTPS,) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 492.50 Td (authentication, rate limiting, parser support for PCAP files, model versioning, monitoring, and persistent) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.35 Tf 306.00 486.75 Td (audit storage.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.820 0.643 0.000 RG
+0.50 w 22.00 233.00 m 573.00 233.00 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.718 0.475 0.122 rg
+BT /F2 5.00 Tf 250.00 237.00 Td (AWS Infrastructure) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.937 0.267 0.267 RG
+0.80 w 19.00 58.00 58.00 167.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.937 0.267 0.267 rg
+BT /F2 4.60 Tf 23.00 217.00 Td (Attack Classes) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.145 0.388 0.922 RG
+0.80 w 87.00 58.00 82.00 167.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.145 0.388 0.922 rg
+BT /F2 4.60 Tf 91.00 217.00 Td (Client / Ingestion) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.976 0.451 0.086 RG
+0.80 w 181.00 58.00 78.00 167.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.976 0.451 0.086 rg
+BT /F2 4.60 Tf 185.00 217.00 Td (Backend API) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.078 0.722 0.651 RG
+0.80 w 270.00 58.00 76.00 167.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.078 0.722 0.651 rg
+BT /F2 4.60 Tf 274.00 217.00 Td (Preprocessing) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.918 0.702 0.031 RG
+0.80 w 356.00 58.00 76.00 167.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.918 0.702 0.031 rg
+BT /F2 4.60 Tf 360.00 217.00 Td (Feature / Training) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.133 0.773 0.369 RG
+0.80 w 443.00 58.00 66.00 167.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.133 0.773 0.369 rg
+BT /F2 4.60 Tf 447.00 217.00 Td (ML Inference) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.545 0.361 0.965 RG
+0.80 w 519.00 58.00 49.00 167.00 re S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.545 0.361 0.965 rg
+BT /F2 4.60 Tf 523.00 217.00 Td (Docker) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.945 0.949 rg
+0.937 0.267 0.267 RG
+0.55 w 31.00 198.00 40.00 13.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 45.78 204.80 Td (Normal) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.945 0.949 rg
+0.937 0.267 0.267 RG
+0.55 w 31.00 180.00 40.00 13.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 44.04 186.80 Td (DoS/DDoS) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.945 0.949 rg
+0.937 0.267 0.267 RG
+0.55 w 31.00 162.00 40.00 13.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 43.17 168.80 Td (Port Scan) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.945 0.949 rg
+0.937 0.267 0.267 RG
+0.55 w 31.00 144.00 40.00 13.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 41.44 150.80 Td (Brute Force) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.945 0.949 rg
+0.937 0.267 0.267 RG
+0.55 w 31.00 126.00 40.00 13.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 42.30 132.80 Td (Web Attack) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.945 0.949 rg
+0.937 0.267 0.267 RG
+0.55 w 31.00 108.00 40.00 13.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 45.78 114.80 Td (Botnet) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.937 0.965 1.000 rg
+0.145 0.388 0.922 RG
+0.55 w 100.00 190.00 42.00 21.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.10 Tf 111.36 204.80 Td (CSV Upload) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.937 0.965 1.000 rg
+0.145 0.388 0.922 RG
+0.55 w 148.00 190.00 42.00 21.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.10 Tf 161.29 204.80 Td (React UI) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.937 0.965 1.000 rg
+0.145 0.388 0.922 RG
+0.55 w 100.00 155.00 42.00 21.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.10 Tf 111.36 169.80 Td (Axios POST) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.937 0.965 1.000 rg
+0.145 0.388 0.922 RG
+0.55 w 148.00 155.00 42.00 21.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.10 Tf 161.29 169.80 Td (Recharts) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.937 0.965 1.000 rg
+0.145 0.388 0.922 RG
+0.55 w 118.00 115.00 45.00 22.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.10 Tf 131.83 130.80 Td (Dashboard) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.969 0.929 rg
+0.976 0.451 0.086 RG
+0.55 w 197.00 195.00 50.00 18.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.10 Tf 215.26 206.80 Td (FastAPI) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.969 0.929 rg
+0.976 0.451 0.086 RG
+0.55 w 197.00 167.00 50.00 18.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 209.78 178.80 Td (POST /predict) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.969 0.929 rg
+0.976 0.451 0.086 RG
+0.55 w 197.00 139.00 50.00 18.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 212.60 150.80 Td (File Limit) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+1.000 0.969 0.929 rg
+0.976 0.451 0.086 RG
+0.55 w 197.00 111.00 50.00 18.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 209.78 122.80 Td (JSON Response) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.925 0.996 1.000 rg
+0.078 0.722 0.651 RG
+0.55 w 285.00 197.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 301.48 207.80 Td (Read CSV) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.925 0.996 1.000 rg
+0.078 0.722 0.651 RG
+0.55 w 285.00 171.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 291.61 181.80 Td (Validate 52 Features) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.925 0.996 1.000 rg
+0.078 0.722 0.651 RG
+0.55 w 285.00 145.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 297.72 155.80 Td (Fill NaN/Inf) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.925 0.996 1.000 rg
+0.078 0.722 0.651 RG
+0.55 w 285.00 119.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 295.84 129.80 Td (StandardScaler) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.996 0.988 0.910 rg
+0.918 0.702 0.031 RG
+0.55 w 371.00 197.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 390.30 207.80 Td (SMOTE) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.996 0.988 0.910 rg
+0.918 0.702 0.031 RG
+0.55 w 371.00 171.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 384.66 181.80 Td (Optuna Tune) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.996 0.988 0.910 rg
+0.918 0.702 0.031 RG
+0.55 w 371.00 145.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.80 Tf 383.39 155.80 Td (RF / XGB / LR) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.996 0.988 0.910 rg
+0.918 0.702 0.031 RG
+0.55 w 371.00 119.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 384.66 129.80 Td (Metrics CSV) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.941 0.992 0.957 rg
+0.133 0.773 0.369 RG
+0.55 w 454.00 197.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.50 Tf 464.84 207.80 Td (calibrated model) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.941 0.992 0.957 rg
+0.133 0.773 0.369 RG
+0.55 w 454.00 171.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.80 Tf 467.28 181.80 Td (OOD detector) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.941 0.992 0.957 rg
+0.133 0.773 0.369 RG
+0.55 w 454.00 145.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 468.60 155.80 Td (Risk Level) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.941 0.992 0.957 rg
+0.133 0.773 0.369 RG
+0.55 w 454.00 119.00 48.00 17.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.70 Tf 465.83 129.80 Td (Uncertain Band) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.961 0.953 1.000 rg
+0.545 0.361 0.965 RG
+0.55 w 528.00 195.00 36.00 19.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.50 Tf 534.49 207.80 Td (Nginx Frontend) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.961 0.953 1.000 rg
+0.545 0.361 0.965 RG
+0.55 w 528.00 163.00 36.00 19.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 3.80 Tf 536.18 175.80 Td (Uvicorn API) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.961 0.953 1.000 rg
+0.545 0.361 0.965 RG
+0.55 w 528.00 131.00 36.00 19.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 539.42 143.80 Td (AWS ECR) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.961 0.953 1.000 rg
+0.545 0.361 0.965 RG
+0.55 w 528.00 99.00 36.00 19.00 re B
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F2 4.00 Tf 539.42 111.80 Td (AWS EC2) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 71.00 169.00 m 100.00 169.00 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 100.00 169.00 m 96.00 171.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 100.00 169.00 m 96.00 166.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 190.00 169.00 m 197.00 169.00 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 197.00 169.00 m 193.00 171.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 197.00 169.00 m 193.00 166.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 247.00 169.00 m 285.00 169.00 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 285.00 169.00 m 281.00 171.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 285.00 169.00 m 281.00 166.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 333.00 169.00 m 371.00 169.00 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 371.00 169.00 m 367.00 171.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 371.00 169.00 m 367.00 166.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 419.00 169.00 m 454.00 169.00 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 454.00 169.00 m 450.00 171.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 454.00 169.00 m 450.00 166.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 502.00 169.00 m 528.00 169.00 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 528.00 169.00 m 524.00 171.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.294 0.333 0.388 RG
+0.55 w 528.00 169.00 m 524.00 166.50 l S
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.00 Tf 24.00 37.00 Td (Fig. 1. Corrected full-stack architecture: React/Vite frontend served by Nginx uploads CSV traffic to the FastAPI backend.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.00 Tf 24.00 30.00 Td (The backend validates features, applies saved preprocessing artifacts, runs calibrated ML inference and OOD checks, then returns) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 rg
+BT /F1 5.00 Tf 24.00 23.00 Td (summary metrics and row predictions. Docker images are stored in AWS ECR and executed on AWS EC2 with ports 3000 and 8000.) Tj ET
+0.000 0.000 0.000 RG
+0.000 0.000 0.000 rg
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000000333 00000 n 
+0000000404 00000 n 
+0000000477 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+28556
+%%EOF
